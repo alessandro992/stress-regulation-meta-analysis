@@ -72,8 +72,6 @@ typeStressComponent <-sample(c(1,2,3,4,5,6),346, replace=T)
 Affective_consequences_of_stress <-sample(c(1,2,3,4),346, replace=T)
 #1= Low arousal, negative valence, 2= High arousal, negative valence, 3= Low arousal, positive valence 4= High arousal, positive valence.
 exact_type_of_population <- sample(c(NA,"nursersy students","employers","psychology students","patients with depression","COPD patients","managers"),346, replace=T)
-frequency_of_intervention <- as.integer(runif(346,min=0, max=5))
-#how many times each week the participants receive the intervention
 duration_of_intervention <- as.integer(runif(346,min=0, max=80))
 #total duration of the intervention in hours
 number_of_intervention <- as.integer(runif(346,min=0, max=90))
@@ -119,7 +117,7 @@ data1$Type_of_Sam<-Type_of_Sam
 #If the article is on social support I code 1 =partner 2= friends 3=stranger                            
 #Code the source of SocialSupport 
 
-MetaData <-cbind(publication_year,nMale,nFemale,mean_age,doi,citations,inLabAdministration,journalH5,source,predictedDirection,items,mean1,mean2,sd1,sd2,se1,se2,p.reported,n1,n2,n3,researchDesign,focal_variable,journal,country,number_of_intervention,Instrument,presence_of_individual_differences,MASdata,typePopulation,typeComparisonGroup,typeStressComponent,Affective_consequences_of_stress,exact_type_of_population,frequency_of_intervention,duration_of_intervention,nationality,type_of_effect,measure,timing_of_effect,data1)
+MetaData <-cbind(publication_year,nMale,nFemale,mean_age,doi,citations,inLabAdministration,journalH5,source,predictedDirection,items,mean1,mean2,sd1,sd2,se1,se2,p.reported,n1,n2,n3,researchDesign,focal_variable,journal,country,number_of_intervention,Instrument,presence_of_individual_differences,MASdata,typePopulation,typeComparisonGroup,typeStressComponent,Affective_consequences_of_stress,exact_type_of_population,duration_of_intervention,nationality,type_of_effect,measure,timing_of_effect,data1)
 #Create the first simulated dataset with the info encoded until now
 paperID <- 1:nrow(MetaData)
 studyID <-1:nrow(MetaData)
@@ -156,7 +154,7 @@ StressData$Domain.5.risk.of.bias<- ifelse(StressData$Domain.5.risk.of.bias == "L
 StressData$Overall.risk.of.bias<- ifelse(StressData$Overall.risk.of.bias == "Low", 1, ifelse(StressData$Overall.risk.of.bias == "High", 3, 2))
 
 data <- StressData
-View(data)
+
 
 #StressData <- StressData %>% mutate (Domain.1.risk.of.bias = ifelse(Domain.1.risk.of.bias == "Low", 1,
                                     #ifelse(Domain.1.risk.of.bias == "High",3,2))) #altro modo di fare ifelse
