@@ -25,6 +25,10 @@ inLabAdministration <-sample(c(1,2,3),346, replace=T)
 doi <-sample(c(NA,"http://dx.doi.org/10.1037/a0028242","http://dx.doi.org/10.1037/a02328240"),346, replace=T)
 citations <-NA
 #citations by Google Scholar
+type_of_effect <-sample(c(1,2,3),346, replace=T)
+#1= main bivariate 2= main omnibus 3= interaction
+measure <- NA
+#what is being measured? (e.g. heart-rate, state anxiety, depression) 
 
 mean1 <- round(rnorm(346,5,1), 2)
 mean2 <- round(rnorm(346,5,2), 2)
@@ -115,7 +119,7 @@ data1$Type_of_Sam<-Type_of_Sam
 #If the article is on social support I code 1 =partner 2= friends 3=stranger                            
 #Code the source of SocialSupport 
 
-MetaData <-cbind(publication_year,nMale,nFemale,mean_age,doi,citations,inLabAdministration,journalH5,source,predictedDirection,items,mean1,mean2,sd1,sd2,se1,se2,p.reported,n1,n2,n3,researchDesign,focal_variable,journal,country,number_of_intervention,Instrument,presence_of_individual_differences,MASdata,typePopulation,typeComparisonGroup,typeStressComponent,Affective_consequences_of_stress,exact_type_of_population,frequency_of_intervention,duration_of_intervention,nationality,timing_of_effect,data1)
+MetaData <-cbind(publication_year,nMale,nFemale,mean_age,doi,citations,inLabAdministration,journalH5,source,predictedDirection,items,mean1,mean2,sd1,sd2,se1,se2,p.reported,n1,n2,n3,researchDesign,focal_variable,journal,country,number_of_intervention,Instrument,presence_of_individual_differences,MASdata,typePopulation,typeComparisonGroup,typeStressComponent,Affective_consequences_of_stress,exact_type_of_population,frequency_of_intervention,duration_of_intervention,nationality,type_of_effect,measure,timing_of_effect,data1)
 #Create the first simulated dataset with the info encoded until now
 paperID <- 1:nrow(MetaData)
 studyID <-1:nrow(MetaData)
@@ -149,9 +153,10 @@ StressData$Domain.2.risk.of.bias<- ifelse(StressData$Domain.2.risk.of.bias == "L
 StressData$Domain.3.risk.of.bias<- ifelse(StressData$Domain.3.risk.of.bias == "Low", 1, ifelse(StressData$Domain.3.risk.of.bias == "High",3,2))
 StressData$Domain.4.risk.of.bias<- ifelse(StressData$Domain.4.risk.of.bias == "Low", 1, ifelse(StressData$Domain.4.risk.of.bias == "High",3,2))
 StressData$Domain.5.risk.of.bias<- ifelse(StressData$Domain.5.risk.of.bias == "Low", 1, ifelse(StressData$Domain.5.risk.of.bias == "High",3,2))
-StressData$overallRiskOfBias<- ifelse(StressData$Overall.risk.of.bias == "Low", 1, ifelse(StressData$Overall.risk.of.bias == "High", 3, 2))
+StressData$Overall.risk.of.bias<- ifelse(StressData$Overall.risk.of.bias == "Low", 1, ifelse(StressData$Overall.risk.of.bias == "High", 3, 2))
 
 data <- StressData
+View(data)
 
-StressData <- StressData %>% mutate (Domain.1.risk.of.bias = ifelse(Domain.1.risk.of.bias == "Low", 1,
-                                    ifelse(Domain.1.risk.of.bias == "High",3,2))) #altro modo di fare ifelse
+#StressData <- StressData %>% mutate (Domain.1.risk.of.bias = ifelse(Domain.1.risk.of.bias == "Low", 1,
+                                    #ifelse(Domain.1.risk.of.bias == "High",3,2))) #altro modo di fare ifelse
